@@ -1,0 +1,117 @@
+
+🧾 Assignment-1
+
+Task-1
+
+Objective:
+
+Create a new Excel workbook and enter student data.
+
+Steps:
+
+1. Open Microsoft Excel (or Google Sheets / WPS Office Excel).
+
+
+2. Rename “Sheet1” to “Student_Data”:
+
+Right-click on the sheet tab “Sheet1”.
+
+Select Rename, and type Student_Data.
+
+
+
+3. Create a new sheet:
+
+Click the + icon next to the “Student_Data” tab.
+
+Rename it to Scores.
+
+
+
+4. Enter the following data in “Student_Data” sheet:
+
+A (Name)	B (Age)	C (Grade)
+
+John	15	A
+
+
+
+5. Formatting the columns:
+
+Select the Age column (B) → Right click → Format Cells → Number → 0 decimal places.
+
+Select the Grade column (C) → Right click → Format Cells → Text.
+
+
+
+
+•Task-2
+
+Objective:
+
+Copy and rearrange the data into the “Scores” sheet.
+
+Steps:
+
+1. Go to “Student_Data” sheet.
+
+
+2. Select the entire data (A1:C2) and press Ctrl + C (Copy).
+
+
+3. Go to “Scores” sheet and paste the data (Ctrl + V).
+
+
+4. In “Scores” sheet:
+
+You’ll have three columns: Name | Age | Grade.
+
+
+
+5. Cut the “Grade” column (select the column → right click → Cut).
+
+
+6. Paste the “Grade” column next to the “Name” column (i.e., before “Age” column).
+
+The new order in the “Scores” sheet should be:
+
+A (Name)	B (Grade)	C (Age)
+
+John	A	15
+
+
+
+•Task-3
+
+Objective:
+
+Print or export the “Student_Data” sheet as a PDF.
+
+Steps:
+
+1. Go to File → Print.
+
+
+2. Under Settings, choose:
+
+Print Active Sheets, and ensure only Student_Data is selected.
+
+Adjust layout and scaling if needed.
+
+
+
+3. Select “Save as PDF” or Export as PDF.
+
+
+4. Save the file with the name Student_Data.pdf.
+
+
+✅ Final Deliverables Checklist
+
+Task	Required Files	Format
+
+Task 1	Screenshot + Excel file (Student_Data.xlsx)	.xlsx, 
+Task 2	Screenshot + Excel file (Scores.xlsx)	.xlsx, 
+Task 3	Exported PDF of “Student_Data”	
+
+
