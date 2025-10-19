@@ -1,0 +1,207 @@
+# Assignment 11: SQL Data Conversion & Concatenation
+
+## Step 1: Create and Populate Orders Table
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE,
+    Amount DECIMAL(10,2)
+);
+
+INSERT INTO Orders (OrderID, OrderDate, Amount) VALUES
+(1, '2024-11-01', 250.50),
+(2, '2024-11-02', 300.75),
+(3, '2024-11-03', 150.25);
+```
+
+## Step 2: SQL Query Tasks
+
+### Query a) Amount to String
+**Corrected SQL (MySQL):**
+```sql
+SELECT CAST(Amount AS CHAR(10)) AS AmountText FROM Orders;
+```
+
+**Alternative for different databases:**
+
+**MySQL/PostgreSQL:**
+```sql
+SELECT CAST(Amount AS CHAR(10)) AS AmountText FROM Orders;
+```
+
+**SQL Server:**
+```sql
+SELECT CAST(Amount AS VARCHAR(10)) AS AmountText FROM Orders;
+```
+
+**Oracle:**
+```sql
+SELECT TO_CHAR(Amount) AS AmountText FROM Orders;
+```
+
+**Expected Result:**
+| AmountText |
+|------------|
+| 250.50     |
+| 300.75     |
+| 150.25     |
+
+### Query b) Date to String (YYYY-MM-DD format)
+**Corrected SQL (MySQL):**
+```sql
+SELECT DATE_FORMAT(OrderDate, '%Y-%m-%d') AS OrderDateText FROM Orders;
+```
+
+**Alternative for different databases:**
+
+**MySQL:**
+```sql
+SELECT DATE_FORMAT(OrderDate, '%Y-%m-%d') AS OrderDateText FROM Orders;
+```
+
+**SQL Server:**
+```sql
+SELECT FORMAT(OrderDate, 'yyyy-MM-dd') AS OrderDateText FROM Orders;
+```
+
+**PostgreSQL:**
+```sql
+SELECT TO_CHAR(OrderDate, 'YYYY-MM-DD') AS OrderDateText FROM Orders;
+```
+
+**Oracle:**
+```sql
+SELECT TO_CHAR(OrderDate, 'YYYY-MM-DD') AS OrderDateText FROM Orders;
+```
+
+**Expected Result:**
+| OrderDateText |
+|---------------|
+| 2024-11-01    |
+| 2024-11-02    |
+| 2024-11-03    |
+
+### Query c) String to Date
+**Corrected SQL:**
+```sql
+SELECT CAST('2024-11-05' AS DATE) AS ConvertedDate;
+```
+
+**Alternative for different databases:**
+
+**MySQL/SQL Server/PostgreSQL:**
+```sql
+SELECT CAST('2024-11-05' AS DATE) AS ConvertedDate;
+```
+
+**Oracle:**
+```sql
+SELECT TO_DATE('2024-11-05', 'YYYY-MM-DD') AS ConvertedDate FROM DUAL;
+```
+
+**Expected Result:**
+| ConvertedDate |
+|---------------|
+| 2024-11-05    |
+
+### Query d) Extract Year from OrderDate
+**Corrected SQL:**
+```sql
+SELECT YEAR(OrderDate) AS OrderYear FROM Orders;
+```
+
+**Alternative for different databases:**
+
+**MySQL/SQL Server:**
+```sql
+SELECT YEAR(OrderDate) AS OrderYear FROM Orders;
+```
+
+**PostgreSQL/Oracle:**
+```sql
+SELECT EXTRACT(YEAR FROM OrderDate) AS OrderYear FROM Orders;
+```
+
+**Expected Result:**
+| OrderYear |
+|-----------|
+| 2024      |
+| 2024      |
+| 2024      |
+
+### Query e) Concatenate Fields
+**Corrected SQL (MySQL):**
+```sql
+SELECT CONCAT(DATE_FORMAT(OrderDate, '%Y-%m-%d'), ' - $', Amount) AS Summary FROM Orders;
+```
+
+**Alternative for different databases:**
+
+**MySQL:**
+```sql
+SELECT CONCAT(DATE_FORMAT(OrderDate, '%Y-%m-%d'), ' - $', Amount) AS Summary FROM Orders;
+```
+
+**SQL Server:**
+```sql
+SELECT FORMAT(OrderDate, 'yyyy-MM-dd') + ' - $' + CAST(Amount AS VARCHAR(10)) AS Summary FROM Orders;
+```
+
+**PostgreSQL:**
+```sql
+SELECT TO_CHAR(OrderDate, 'YYYY-MM-DD') || ' - $' || Amount::VARCHAR AS Summary FROM Orders;
+```
+
+**Oracle:**
+```sql
+SELECT TO_CHAR(OrderDate, 'YYYY-MM-DD') || ' - $' || TO_CHAR(Amount) AS Summary FROM Orders;
+```
+
+**Expected Result:**
+| Summary             |
+|---------------------|
+| 2024-11-01 - $250.50 |
+| 2024-11-02 - $300.75 |
+| 2024-11-03 - $150.25 |
+
+## Complete SQL Script for Submission (MySQL):
+
+```sql
+-- Create Orders Table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE,
+    Amount DECIMAL(10,2)
+);
+
+-- Insert Sample Data
+INSERT INTO Orders (OrderID, OrderDate, Amount) VALUES
+(1, '2024-11-01', 250.50),
+(2, '2024-11-02', 300.75),
+(3, '2024-11-03', 150.25);
+
+-- Query a: Amount to String
+SELECT CAST(Amount AS CHAR(10)) AS AmountText FROM Orders;
+
+-- Query b: Date to String (YYYY-MM-DD format)
+SELECT DATE_FORMAT(OrderDate, '%Y-%m-%d') AS OrderDateText FROM Orders;
+
+-- Query c: String to Date
+SELECT CAST('2024-11-05' AS DATE) AS ConvertedDate;
+
+-- Query d: Extract Year from OrderDate
+SELECT YEAR(OrderDate) AS OrderYear FROM Orders;
+
+-- Query e: Concatenate Fields
+SELECT CONCAT(DATE_FORMAT(OrderDate, '%Y-%m-%d'), ' - $', Amount) AS Summary FROM Orders;
+```
+
+## Database Compatibility Guide:
+
+| Operation | MySQL | SQL Server | PostgreSQL | Oracle |
+|-----------|-------|------------|------------|--------|
+| Cast to String | `CAST(x AS CHAR)` | `CAST(x AS VARCHAR)` | `CAST(x AS TEXT)` | `TO_CHAR(x)` |
+| Date Format | `DATE_FORMAT()` | `FORMAT()` | `TO_CHAR()` | `TO_CHAR()` |
+| String to Date | `CAST()` | `CAST()` | `CAST()` | `TO_DATE()` |
+| Extract Year | `YEAR()` | `YEAR()` | `EXTRACT()` | `EXTRACT()` |
+| Concatenation | `CONCAT()` | `+` | `\|\|` | `\|\|` |
