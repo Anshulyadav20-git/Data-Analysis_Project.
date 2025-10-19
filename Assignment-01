@@ -1,117 +1,93 @@
-
-🧾 Assignment-1
-
-Task-1
-
-Objective:
-
-Create a new Excel workbook and enter student data.
-
-Steps:
-
-1. Open Microsoft Excel (or Google Sheets / WPS Office Excel).
-
-
-2. Rename “Sheet1” to “Student_Data”:
-
-Right-click on the sheet tab “Sheet1”.
-
-Select Rename, and type Student_Data.
-
-
-
-3. Create a new sheet:
-
-Click the + icon next to the “Student_Data” tab.
-
-Rename it to Scores.
-
-
-
-4. Enter the following data in “Student_Data” sheet:
-
-A (Name)	B (Age)	C (Grade)
-
-John	15	A
-
-
-
-5. Formatting the columns:
-
-Select the Age column (B) → Right click → Format Cells → Number → 0 decimal places.
-
-Select the Grade column (C) → Right click → Format Cells → Text.
-
-
-
-
-•Task-2
-
-Objective:
-
-Copy and rearrange the data into the “Scores” sheet.
-
-Steps:
-
-1. Go to “Student_Data” sheet.
-
-
-2. Select the entire data (A1:C2) and press Ctrl + C (Copy).
-
-
-3. Go to “Scores” sheet and paste the data (Ctrl + V).
-
-
-4. In “Scores” sheet:
-
-You’ll have three columns: Name | Age | Grade.
-
-
-
-5. Cut the “Grade” column (select the column → right click → Cut).
-
-
-6. Paste the “Grade” column next to the “Name” column (i.e., before “Age” column).
-
-The new order in the “Scores” sheet should be:
-
-A (Name)	B (Grade)	C (Age)
-
-John	A	15
-
-
-
-•Task-3
-
-Objective:
-
-Print or export the “Student_Data” sheet as a PDF.
-
-Steps:
-
-1. Go to File → Print.
-
-
-2. Under Settings, choose:
-
-Print Active Sheets, and ensure only Student_Data is selected.
-
-Adjust layout and scaling if needed.
-
-
-
-3. Select “Save as PDF” or Export as PDF.
-
-
-4. Save the file with the name Student_Data.pdf.
-
-
-✅ Final Deliverables Checklist
-
-Task	Required Files	Format
-
-Task 1	Screenshot + Excel file (Student_Data.xlsx)	.xlsx, 
-Task 2	Screenshot + Excel file (Scores.xlsx)	.xlsx, 
-Task 3	Exported PDF of “Student_Data”	
-
+# Assignment 1: Excel Basics - Complete Step-by-Step Guide
+
+## Task 1: Create and Format the Student_Data Sheet
+
+### Step 1: Open Excel and Rename Sheet
+1. Open Microsoft Excel and create a new blank workbook
+2. Right-click on the "Sheet1" tab at the bottom
+3. Select "Rename" and type `Student_Data`
+4. Press Enter to confirm
+
+### Step 2: Create New Scores Sheet
+1. Click the "+" button next to the sheet tabs to create a new sheet
+2. Right-click the new sheet tab and rename it to `Scores`
+
+### Step 3: Enter Data in Student_Data Sheet
+In the Student_Data sheet, enter the following:
+
+| Cell | Content |
+|------|---------|
+| A1 | Name |
+| B1 | Age |
+| C1 | Grade |
+| A2 | John |
+| B2 | 15 |
+| C2 | A |
+
+### Step 4: Format Columns
+1. **Format Age column as Number:**
+   - Select column B (click on the "B" header)
+   - Right-click and choose "Format Cells"
+   - Select "Number" category
+   - Set Decimal places to 0
+   - Click OK
+
+2. **Format Grade column as Text:**
+   - Select column C (click on the "C" header)
+   - Right-click and choose "Format Cells"
+   - Select "Text" category
+   - Click OK
+
+**Screenshot Requirements for Task 1:**
+- Screenshot showing the renamed sheets (Student_Data and Scores)
+- Screenshot showing the data entered in Student_Data sheet
+- Screenshot showing the format cells dialog for Age and Grade columns
+
+## Task 2: Copy, Paste, and Rearrange Data
+
+### Step 1: Copy Data from Student_Data to Scores
+1. Go to the Student_Data sheet
+2. Select cells A1 through C2
+3. Press `Ctrl + C` to copy
+4. Go to the Scores sheet
+5. Click on cell A1 and press `Ctrl + V` to paste
+
+### Step 2: Cut and Move Grade Column
+1. In the Scores sheet, select the Grade column (column C)
+2. Right-click and choose "Cut" or press `Ctrl + X`
+3. Select column B (the Age column)
+4. Right-click and choose "Insert Cut Cells"
+5. The columns should now be in this order: Name, Grade, Age
+
+**Final arrangement in Scores sheet:**
+| A | B | C |
+|---|---|---|
+| Name | Grade | Age |
+| John | A | 15 |
+
+**Screenshot Requirements for Task 2:**
+- Screenshot showing copied data in Scores sheet
+- Screenshot showing the final arrangement after moving Grade column
+- Screenshot of both sheets side by side
+
+## Task 3: Print/Export Student_Data Sheet as PDF
+
+### Step 1: Prepare for Printing/Exporting
+1. Go to the Student_Data sheet
+2. Ensure the data is properly formatted and visible
+
+### Step 2: Export as PDF
+**Method 1: Using Save As**
+1. Click "File" → "Save As"
+2. Choose where you want to save the file
+3. In the "Save as type" dropdown, select "PDF (*.pdf)"
+4. Click "Options" and make sure "Active sheet" is selected
+5. Click "Save"
+
+**Method 2: Using Export**
+1. Click "File" → "Export"
+2. Select "Create PDF/XPS Document"
+3. Click "Create PDF/XPS"
+4. Choose location and ensure "Active sheet" is selected
+5. Click "Publish"
 
