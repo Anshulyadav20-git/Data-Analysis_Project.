@@ -1,0 +1,236 @@
+
+🧾 Assignment 3: Data Visualization in Excel/Google Sheets
+
+Overview:
+
+In this assignment, you will practice creating different types of charts and a pivot table using Excel (or Google Sheets).
+The goal is to visualize sales data, compare categories, and summarize key insights.
+
+You’ll create:
+
+A bar chart (Monthly Sales)
+
+A column chart (Product Profit Comparison)
+
+A pie chart (Sales by Region)
+
+A line chart (Sales Trend)
+
+A scatter plot (Sales vs. Profit)
+
+A pivot table (Total Sales by Region)
+
+
+
+---
+
+Dataset:
+
+Month	Product	Region	Sales	Profit
+
+January	Product A	North	5000	2000
+February	Product B	East	4000	1500
+March	Product C	South	6000	2500
+April	Product A	North	7000	3000
+May	Product B	West	8000	3500
+June	Product C	East	9000	4000
+
+
+
+---
+
+🧩 Tasks and Step-by-Step Instructions
+
+
+---
+
+Task 1: Bar Chart (Monthly Sales)
+
+Goal:
+
+Create a bar chart to visualize monthly sales.
+
+Steps:
+
+1. Select the columns Month and Sales.
+
+
+2. Go to the Insert tab → Click Bar Chart → Choose “Clustered Bar.”
+
+
+3. Label:
+
+X-axis: Month
+
+Y-axis: Sales
+
+
+
+4. Add chart title: "Monthly Sales Bar Chart"
+
+
+5. Format bars with different colors for each month (optional).
+
+
+
+✅ Result: You should see a bar chart showing how sales vary each month.
+
+
+---
+
+Task 2: Column Chart (Product Profit Comparison)
+
+Goal:
+
+Compare profits of different products.
+
+Steps:
+
+1. Select Product and Profit columns.
+
+
+2. Go to Insert → Column Chart → Choose “Clustered Column.”
+
+
+3. Label:
+
+X-axis: Product
+
+Y-axis: Profit
+
+
+
+4. Add chart title: "Product Profit Comparison"
+
+
+
+✅ Result: A column chart showing which product gives the highest profit.
+
+
+---
+
+Task 3: Pie Chart (Sales by Region)
+
+Goal:
+
+Show the percentage of total sales from each region.
+
+Steps:
+
+1. Select Region and Sales columns.
+
+
+2. Go to Insert → Pie Chart.
+
+
+3. Add chart title: "Sales by Region."
+
+
+4. Right-click on slices → Add Data Labels.
+
+
+5. Format labels to show percentage values.
+
+
+
+✅ Result: A pie chart where each slice represents a region’s sales contribution.
+
+
+---
+
+Task 4: Line Chart (Sales Trend)
+
+Goal:
+
+Show how sales changed month-by-month.
+
+Steps:
+
+1. Select Month and Sales columns.
+
+
+2. Go to Insert → Line Chart.
+
+
+3. Add chart title: "Monthly Sales Trend."
+
+
+4. Label:
+
+X-axis: Month
+
+Y-axis: Sales
+
+
+
+
+✅ Result: A line chart that clearly shows the sales growth trend over six months.
+
+
+---
+
+Task 5: Scatter Plot (Sales vs. Profit)
+
+Goal:
+
+Analyze the relationship between sales and profit.
+
+Steps:
+
+1. Select Sales and Profit columns.
+
+
+2. Go to Insert → Scatter Chart (XY Scatter).
+
+
+3. Add chart title: "Sales vs. Profit Scatter Plot."
+
+
+4. Label:
+
+X-axis: Sales
+
+Y-axis: Profit
+
+
+
+
+✅ Result: A scatter plot that shows how profit changes with sales volume.
+
+
+---
+
+Task 6: Pivot Table (Total Sales by Region)
+
+Goal:
+
+Summarize total sales for each region.
+
+Steps:
+
+1. Select your entire dataset (A1:E7).
+
+
+2. Go to Insert → Pivot Table.
+
+
+3. Place:
+
+Region in the Rows area.
+
+Sales in the Values area.
+
+
+
+4. Rename table title: "Total Sales by Region."
+
+
+5. (Optional) Apply a light color format for better readability.
+
+
+
+✅ Result: A pivot table summarizing total sales contributed by each region.
+
+
+---
+
