@@ -1,0 +1,222 @@
+# Assignment 10: SQL String & Pattern Matching.
+
+## Step 1: Create and Populate Employees Table
+
+CREATE TABLE Employees (
+    EmplD INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    Email VARCHAR(50)
+);
+
+INSERT INTO Employees (EmplD, Name, Department, Email) VALUES
+(1, 'Alice Johnson', 'HR', 'alice.johnson@example.com'),
+(2, 'Bob Smith', 'IT', 'bob.smith@example.com'),
+(3, 'Charlie Brown', 'Finance', 'charlie.brown@example.com'),
+(4, 'Diana Prince', 'HR', 'diana.prince@example.com'),
+(5, 'Eve Adams', 'IT', 'eve.adams@example.org');
+
+## Step 2: SQL Query Tasks
+
+### Query a) @example.com Emails
+**Corrected SQL:**
+```sql
+SELECT Name, Email 
+FROM Employees 
+WHERE Email LIKE '%@example.com';
+```
+
+**Expected Result:**
+| Name          | Email                         |
+|---------------|-------------------------------|
+| Alice Johnson | alice.johnson@example.com     |
+| Bob Smith     | bob.smith@example.com         |
+| Charlie Brown | charlie.brown@example.com     |
+| Diana Prince  | diana.prince@example.com      |
+
+### Query b) Names Starting with 'A'
+**Corrected SQL:**
+```sql
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE 'A%';
+```
+
+**Expected Result:**
+| Name          |
+|---------------|
+| Alice Johnson |
+
+### Query c) Names Ending with 'son'
+**Corrected SQL:**
+```sql
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE '%son';
+```
+
+**Expected Result:**
+| Name          |
+|---------------|
+| Alice Johnson |
+| Bob Smith     |
+
+
+**Corrected Query c:**
+```sql
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE '%son';
+```
+
+**Actual Expected Result:**
+| Name          |
+|---------------|
+| Alice Johnson |
+
+### Query d) Second Letter 'v'
+**Corrected SQL:**
+```sql
+SELECT Name 
+FROM Employees 
+WHERE SUBSTRING(Name, 2, 1) = 'v';
+```
+
+**Alternative using LIKE:**
+```sql
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE '_v%';
+```
+
+**Expected Result:**
+| Name      |
+|-----------|
+| Eve Adams |
+
+## Additional Queries (to complete requirements)
+
+Since the submission guidelines mention queries (a)-(f), but only (a)-(d) are specified, I'll add two more common string function queries:
+
+### Query e) Extract First Names
+```sql
+SELECT 
+    Name,
+    SUBSTRING_INDEX(Name, ' ', 1) AS FirstName
+FROM Employees;
+```
+
+**MySQL Alternative (if SUBSTRING_INDEX not available):**
+```sql
+SELECT 
+    Name,
+    SUBSTRING(Name, 1, LOCATE(' ', Name) - 1) AS FirstName
+FROM Employees;
+```
+
+**Expected Result:**
+| Name          | FirstName |
+|---------------|-----------|
+| Alice Johnson | Alice     |
+| Bob Smith     | Bob       |
+| Charlie Brown | Charlie   |
+| Diana Prince  | Diana     |
+| Eve Adams     | Eve       |
+
+### Query f) Department Name Lengths
+```sql
+SELECT 
+    Department,
+    LENGTH(Department) AS DeptNameLength
+FROM Employees
+GROUP BY Department;
+```
+
+**Expected Result:**
+| Department | DeptNameLength |
+|------------|----------------|
+| HR         | 2              |
+| IT         | 2              |
+| Finance    | 7              |
+
+## Complete SQL Script for Submission:
+
+```sql
+-- Create Employees Table
+CREATE TABLE Employees (
+    EmplD INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    Email VARCHAR(50)
+);
+
+-- Insert Sample Data
+INSERT INTO Employees (EmplD, Name, Department, Email) VALUES
+(1, 'Alice Johnson', 'HR', 'alice.johnson@example.com'),
+(2, 'Bob Smith', 'IT', 'bob.smith@example.com'),
+(3, 'Charlie Brown', 'Finance', 'charlie.brown@example.com'),
+(4, 'Diana Prince', 'HR', 'diana.prince@example.com'),
+(5, 'Eve Adams', 'IT', 'eve.adams@example.org');
+
+-- Query a: @example.com Emails
+SELECT Name, Email 
+FROM Employees 
+WHERE Email LIKE '%@example.com';
+
+-- Query b: Names Starting with 'A'
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE 'A%';
+
+-- Query c: Names Ending with 'son'
+SELECT Name 
+FROM Employees 
+WHERE Name LIKE '%son';
+
+-- Query d: Second Letter 'v'
+SELECT Name 
+FROM Employees 
+WHERE SUBSTRING(Name, 2, 1) = 'v';
+
+-- Query e: Extract First Names
+SELECT 
+    Name,
+    SUBSTRING_INDEX(Name, ' ', 1) AS FirstName
+FROM Employees;
+
+-- Query f: Department Name Lengths
+SELECT 
+    Department,
+    LENGTH(Department) AS DeptNameLength
+FROM Employees
+GROUP BY Department;
+```
+
+## Database Compatibility Notes:
+
+1. **String Functions:**
+   - **SUBSTRING()** works in MySQL, SQL Server, PostgreSQL
+   - **SUBSTRING_INDEX()** is MySQL-specific
+   - **LIKE** operator is standard across all databases
+
+2. **Pattern Matching:**
+   - `%` matches any sequence of characters
+   - `_` matches any single character
+   - `LIKE` is case-insensitive in most databases
+
+## Alternative Queries for Different Databases:
+
+**SQL Server (Query e):**
+```sql
+SELECT 
+    Name,
+    LEFT(Name, CHARINDEX(' ', Name) - 1) AS FirstName
+FROM Employees;
+```
+
+**PostgreSQL (Query e):**
+```sql
+SELECT 
+    Name,
+    SPLIT_PART(Name, ' ', 1) AS FirstName
+FROM Employees;
