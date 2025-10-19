@@ -1,0 +1,118 @@
+SQL Advanced Queries Solution
+
+### Step 1: Create and Populate the Products Table
+
+**Corrected SQL Code:**
+```sql
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(50),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2),
+    Stock INT
+);
+
+INSERT INTO Products (ProductID, ProductName, Category, Price, Stock) VALUES
+(1, 'Laptop', 'Electronics', 800.00, 50),
+(2, 'Smartphone', 'Electronics', 600.00, 30),
+(3, 'Desk Chair', 'Furniture', 120.00, 100),
+(4, 'Table', 'Furniture', 200.00, 20),
+(5, 'Notebook', 'Stationery', 5.00, 500),
+(6, 'Pen', 'Stationery', 2.00, 1000);
+```
+
+**Note:** I corrected the syntax errors in the original INSERT statement including:
+- Fixed missing quotes and commas
+- Changed 'Desk Chart' to 'Desk Chair' (likely intended)
+- Changed 'Perf.' to 'Pen' (to match query requirements)
+- Fixed price formatting issues
+
+### Step 2: SQL Query Tasks
+
+#### Query a) Electronics & Furniture Products
+```sql
+SELECT * FROM Products 
+WHERE Category IN ('Electronics', 'Furniture');
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category    | Price  | Stock |
+|-----------|-------------|-------------|--------|-------|
+| 1         | Laptop      | Electronics | 800.00 | 50    |
+| 2         | Smartphone  | Electronics | 600.00 | 30    |
+| 3         | Desk Chair  | Furniture   | 120.00 | 100   |
+| 4         | Table       | Furniture   | 200.00 | 20    |
+
+#### Query b) Price Range (100-800)
+```sql
+SELECT * FROM Products 
+WHERE Price BETWEEN 100 AND 800;
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category    | Price  | Stock |
+|-----------|-------------|-------------|--------|-------|
+| 1         | Laptop      | Electronics | 800.00 | 50    |
+| 2         | Smartphone  | Electronics | 600.00 | 30    |
+| 3         | Desk Chair  | Furniture   | 120.00 | 100   |
+| 4         | Table       | Furniture   | 200.00 | 20    |
+
+#### Query c) Stock Range (50-500)
+```sql
+SELECT * FROM Products 
+WHERE Stock BETWEEN 50 AND 500;
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category    | Price  | Stock |
+|-----------|-------------|-------------|--------|-------|
+| 1         | Laptop      | Electronics | 800.00 | 50    |
+| 3         | Desk Chair  | Furniture   | 120.00 | 100   |
+| 5         | Notebook    | Stationery  | 5.00   | 500   |
+
+#### Query d) Name Contains 'Pen'
+```sql
+SELECT * FROM Products 
+WHERE ProductName LIKE '%Pen%';
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category   | Price | Stock |
+|-----------|-------------|------------|-------|-------|
+| 6         | Pen         | Stationery | 2.00  | 1000  |
+
+#### Query e) Name Starts With 'S'
+```sql
+SELECT * FROM Products 
+WHERE ProductName LIKE 'S%';
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category    | Price  | Stock |
+|-----------|-------------|-------------|--------|-------|
+| 2         | Smartphone  | Electronics | 600.00 | 30    |
+
+#### Query f) Category & Price Filter
+```sql
+SELECT * FROM Products 
+WHERE Category IN ('Stationery', 'Furniture') 
+AND Price BETWEEN 100 AND 300;
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category  | Price  | Stock |
+|-----------|-------------|-----------|--------|-------|
+| 3         | Desk Chair  | Furniture | 120.00 | 100   |
+| 4         | Table       | Furniture | 200.00 | 20    |
+
+#### Query g) Low-Price with 'o' in Name
+```sql
+SELECT * FROM Products 
+WHERE Price BETWEEN 1 AND 10 
+AND ProductName LIKE '%o%';
+```
+
+**Expected Result:**
+| ProductID | ProductName | Category   | Price | Stock |
+|-----------|-------------|------------|-------|-------|
+| 5         | Notebook    | Stationery | 5.00  | 500   |
