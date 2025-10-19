@@ -1,0 +1,190 @@
+Here’s a complete explanation and step-by-step guide for your Assignment 2: Employee Data Processing in Excel/Google Sheets (as shown in your image) 👇
+
+
+---
+
+🧾 Assignment 2: Employee Data Processing in Excel/Google Sheets
+
+Overview
+
+In this assignment, you are given a small employee dataset.
+Your goal is to clean, format, and organize the data properly using Excel or Google Sheets.
+You will practice:
+
+Sorting data
+
+Applying filters
+
+Splitting text into columns
+
+Removing duplicates
+
+Formatting tables neatly
+
+
+
+---
+
+Dataset
+
+Employee_ID	Name	Department	Salary	Joining_Year
+
+E101	John Smith	HR	50000	2020
+E102	Mary Kom	IT	60000	2018
+E103	Alice Singh	Sales	55000	2019
+E104	Bob Kumar	HR	45000	2021
+E105	Sarah Gupta	IT	65000	2017
+E104	Bob Kumar	HR	45000	2021
+
+
+> Note: The last row (Row 6) is a duplicate of Row 4.
+
+
+
+
+---
+
+🧩 Tasks and Step-by-Step Instructions
+
+
+---
+
+Task 1: Sort the table by Salary in descending order
+
+Goal: Arrange employees from highest salary to lowest salary.
+
+Steps:
+
+1. Select the entire data range (A1:E7).
+
+
+2. Go to the Data tab → choose Sort.
+
+
+3. In the Sort dialog box:
+
+Choose Column D (Salary).
+
+Select Sort Z → A (Descending).
+
+
+
+4. Click OK.
+✅ Your data is now sorted from the highest to lowest salary.
+
+
+
+
+---
+
+Task 2: Apply a filter to display only employees in the HR department
+
+Goal: Show only HR department employees.
+
+Steps:
+
+1. Select your data range (A1:E7).
+
+
+2. Go to Data → Filter (or click the Filter icon).
+
+
+3. A small drop-down arrow will appear on each header.
+
+
+4. Click the drop-down arrow on Department (Column C).
+
+
+5. Uncheck all options, then check only HR.
+✅ Now you’ll see only rows where the department is HR.
+
+
+
+
+---
+
+Task 3: Separate the Name column into First_Name and Last_Name
+
+Goal: Split “John Smith” into two columns: “John” and “Smith”.
+
+Steps:
+
+1. Insert two new columns after the “Name” column.
+
+New column F → “First_Name”
+
+New column G → “Last_Name”
+
+
+
+2. Select the Name column.
+
+
+3. Go to Data → Text to Columns (Excel) or Data Split → Split text to columns (Google Sheets).
+
+
+4. Choose Space as the delimiter.
+
+
+5. The full names will be split correctly:
+
+“John Smith” → “John” (First_Name), “Smith” (Last_Name)
+
+
+
+
+✅ Now you have separate columns for first and last names.
+
+
+---
+
+Task 4: Identify and remove duplicate rows
+
+Goal: Remove the extra “Bob Kumar” record with duplicate Employee_ID (E104).
+
+Steps:
+
+1. Select all your data (A1:G7 after the new columns).
+
+
+2. Go to Data → Remove Duplicates.
+
+
+3. In the dialog box:
+
+Check all columns or just Employee_ID.
+
+
+
+4. Click OK.
+✅ One duplicate row (E104) will be deleted.
+
+
+
+
+---
+
+Task 5: Convert the cleaned data into a formal table
+
+Goal: Format your data neatly with consistent styling.
+
+Steps:
+
+1. Select your entire cleaned range (A1:G6).
+
+
+2. Go to Insert → Table (or press Ctrl + T).
+
+
+3. Check “My table has headers” and click OK.
+
+
+4. Apply formatting:
+
+Bold the header row.
+
+Use alternating row colors (light/dark) for readability.
+
+Adjust column widths neatly.
+
+
