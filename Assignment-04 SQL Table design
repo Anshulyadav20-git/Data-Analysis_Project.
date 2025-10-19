@@ -1,0 +1,80 @@
+SQL Table Design and Data Querying Solution
+
+### Step 1: Create the Employees Table
+
+```sql
+CREATE TABLE Employees (
+    EmplD INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+```
+
+### Step 2: Insert Data into Employees Table
+
+```sql
+INSERT INTO Employees (EmplD, Name, Department, Salary) VALUES
+(1, 'John Doe', 'HR', 50000),
+(2, 'Jane Smith', 'IT', 60000),
+(3, 'Alice Johnson', 'Finance', 55000),
+(4, 'Bob Brown', 'HR', 45000),
+(5, 'Charlie White', 'IT', 65000);
+```
+
+### Step 3: Create the Departments Table
+
+```sql
+CREATE TABLE Departments (
+    DepitD INT PRIMARY KEY,
+    DepiName VARCHAR(50),
+    Location VARCHAR(50)
+);
+```
+
+### Step 4: Insert Data into Departments Table
+
+```sql
+INSERT INTO Departments (DepitD, DepiName, Location) VALUES 
+(101, 'Sales', 'New York');
+```
+
+### Step 5: Execute Required Queries
+
+#### Query a: Retrieve all employees
+```sql
+SELECT * FROM Employees;
+```
+
+**Expected Result:**
+| EmplD | Name           | Department | Salary  |
+|-------|----------------|------------|---------|
+| 1     | John Doe       | HR         | 50000.00|
+| 2     | Jane Smith     | IT         | 60000.00|
+| 3     | Alice Johnson  | Finance    | 55000.00|
+| 4     | Bob Brown      | HR         | 45000.00|
+| 5     | Charlie White  | IT         | 65000.00|
+
+#### Query b: List distinct departments
+```sql
+SELECT DISTINCT Department FROM Employees;
+```
+
+**Expected Result:**
+| Department |
+|------------|
+| HR         |
+| IT         |
+| Finance    |
+
+#### Query c: Find employees with salary > 55000
+```sql
+SELECT * FROM Employees WHERE Salary > 55000;
+```
+
+**Expected Result:**
+| EmplD | Name          | Department | Salary  |
+|-------|---------------|------------|---------|
+| 2     | Jane Smith    | IT         | 60000.00|
+| 5     | Charlie White | IT         | 65000.00|
+
