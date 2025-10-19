@@ -1,0 +1,164 @@
+# Assignment 6: SQL Aggregation, Filtering & Conditional Classification
+ 
+##Step 1: Create and Populate the Orders Table
+
+**Corrected SQL Code:**
+```sql
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    ProductCategory VARCHAR(50),
+    Quantity INT,
+    TotalPrice DECIMAL(10,2),
+    OrderDate DATE
+);
+
+INSERT INTO Orders (OrderID, CustomerName, ProductCategory, Quantity, TotalPrice, OrderDate) VALUES
+(1, 'Alice', 'Electronics', 2, 1600.00, '2024-11-01'),
+(2, 'Bob', 'Furniture', 1, 300.00, '2024-11-02'),
+(3, 'Charlie', 'Electronics', 1, 800.00, '2024-11-03'),
+(4, 'Diana', 'Stationery', 10, 80.00, '2024-11-04'),
+(5, 'Eve', 'Electronics', 3, 2400.00, '2024-11-05'),
+(6, 'Frank', 'Stationery', 20, 100.00, '2024-11-06');
+```
+
+**Note:** I corrected the following issues from the original:
+- Fixed the customer name from 'Ever' to 'Eve' (likely typo)
+- Removed extra quotes and dashes in the SQL syntax
+- Fixed formatting for proper SQL execution
+
+## Step 2: SQL Query Tasks
+
+### Query a) Total Quantity by Category
+**Corrected SQL:**
+```sql
+SELECT ProductCategory, SUM(Quantity) AS TotalQuantity
+FROM Orders
+GROUP BY ProductCategory;
+```
+
+**Expected Result:**
+| ProductCategory | TotalQuantity |
+|-----------------|---------------|
+| Electronics     | 6             |
+| Furniture       | 1             |
+| Stationery      | 30            |
+
+### Query b) Categories with High Sales Volume (Total Quantity > 10)
+**Corrected SQL:**
+```sql
+SELECT ProductCategory, SUM(Quantity) AS TotalQuantity
+FROM Orders
+GROUP BY ProductCategory
+HAVING SUM(Quantity) > 10;
+```
+
+**Expected Result:**
+| ProductCategory | TotalQuantity |
+|-----------------|---------------|
+| Stationery      | 30            |
+
+### Query c) Average Order Value by Category
+**Corrected SQL:**
+```sql
+SELECT ProductCategory, AVG(TotalPrice) AS AvgPrice
+FROM Orders
+GROUP BY ProductCategory;
+```
+
+**Expected Result:**
+| ProductCategory | AvgPrice      |
+|-----------------|---------------|
+| Electronics     | 1600.000000   |
+| Furniture       | 300.000000    |
+| Stationery      | 90.000000     |
+
+### Query d) Categories with Low Average Price (Average TotalPrice < 1000)
+**Corrected SQL:**
+```sql
+SELECT ProductCategory, AVG(TotalPrice) AS AvgPrice
+FROM Orders
+GROUP BY ProductCategory
+HAVING AVG(TotalPrice) < 1000;
+```
+
+**Expected Result:**
+| ProductCategory | AvgPrice    |
+|-----------------|-------------|
+| Furniture       | 300.000000  |
+| Stationery      | 90.000000   |
+
+### Query e) Classify Orders by Value
+**Corrected SQL:**
+```sql
+SELECT *,
+    CASE 
+        WHEN TotalPrice > 1000 THEN 'High Value'
+        ELSE 'Low Value'
+    END AS ValueCategory
+FROM Orders;
+```
+
+**Expected Result:**
+| OrderID | CustomerName | ProductCategory | Quantity | TotalPrice | OrderDate   | ValueCategory |
+|---------|-------------|-----------------|----------|------------|-------------|---------------|
+| 1       | Alice       | Electronics     | 2        | 1600.00    | 2024-11-01  | High Value    |
+| 2       | Bob         | Furniture       | 1        | 300.00     | 2024-11-02  | Low Value     |
+| 3       | Charlie     | Electronics     | 1        | 800.00     | 2024-11-03  | Low Value     |
+| 4       | Diana       | Stationery      | 10       | 80.00      | 2024-11-04  | Low Value     |
+| 5       | Eve         | Electronics     | 3        | 2400.00    | 2024-11-05  | High Value    |
+| 6       | Frank       | Stationery      | 20       | 100.00     | 2024-11-06  | Low Value     |
+
+
+## Complete SQL Script for Submission:
+
+```sql
+-- Create Orders Table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    ProductCategory VARCHAR(50),
+    Quantity INT,
+    TotalPrice DECIMAL(10,2),
+    OrderDate DATE
+);
+
+-- Insert Sample Data
+INSERT INTO Orders (OrderID, CustomerName, ProductCategory, Quantity, TotalPrice, OrderDate) VALUES
+(1, 'Alice', 'Electronics', 2, 1600.00, '2024-11-01'),
+(2, 'Bob', 'Furniture', 1, 300.00, '2024-11-02'),
+(3, 'Charlie', 'Electronics', 1, 800.00, '2024-11-03'),
+(4, 'Diana', 'Stationery', 10, 80.00, '2024-11-04'),
+(5, 'Eve', 'Electronics', 3, 2400.00, '2024-11-05'),
+(6, 'Frank', 'Stationery', 20, 100.00, '2024-11-06');
+
+-- Query a: Total Quantity by Category
+SELECT ProductCategory, SUM(Quantity) AS TotalQuantity
+FROM Orders
+GROUP BY ProductCategory;
+
+-- Query b: Categories with High Sales Volume
+SELECT ProductCategory, SUM(Quantity) AS TotalQuantity
+FROM Orders
+GROUP BY ProductCategory
+HAVING SUM(Quantity) > 10;
+
+-- Query c: Average Order Value by Category
+SELECT ProductCategory, AVG(TotalPrice) AS AvgPrice
+FROM Orders
+GROUP BY ProductCategory;
+
+-- Query d: Categories with Low Average Price
+SELECT ProductCategory, AVG(TotalPrice) AS AvgPrice
+FROM Orders
+GROUP BY ProductCategory
+HAVING AVG(TotalPrice) < 1000;
+
+-- Query e: Classify Orders by Value
+SELECT *,
+    CASE 
+        WHEN TotalPrice > 1000 THEN 'High Value'
+        ELSE 'Low Value'
+    END AS ValueCategory
+FROM Orders;
+```
