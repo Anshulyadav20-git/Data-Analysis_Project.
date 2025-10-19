@@ -1,0 +1,232 @@
+# Assignment 9: SQL Date & Time FunctiDate
+
+## Step 1: Create and Populate Employees Table
+
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    DateOfBirth DATE,
+    JoinDate DATE
+);
+
+INSERT INTO Employees (EmpID, Name, DateOfBirth, JoinDate) VALUES
+(1, 'Alice Johnson', '1985-05-20', '2010-06-15'),
+(2, 'Bob Smith', '1990-08-10', '2015-09-01'),
+(3, 'Charlie Brown', '1986-03-25', '2012-11-12'),
+(4, 'Diana Prince', '1992-01-30', '2017-07-06'),
+(5, 'Eve Adams', '1987-12-05', '2013-03-20');
+
+
+## Step 2: SQL Query Tasks
+
+### Query a) Current Date & Time
+**Corrected SQL:**
+```sql
+SELECT CURRENT_TIMESTAMP AS CurrentDateTime;
+```
+
+**Alternative for different databases:**
+- **MySQL:** `SELECT NOW();`
+- **SQL Server:** `SELECT GETDATE();`
+- **Oracle:** `SELECT SYSDATE FROM DUAL;`
+
+### Query b) Calculate Age
+**Corrected SQL (Standard approach):**
+```sql
+SELECT 
+    Name, 
+    DateOfBirth,
+    FLOOR(DATEDIFF(CURRENT_DATE, DateOfBirth) / 365.25) AS Age
+FROM Employees;
+```
+
+**Database-specific alternatives:**
+
+**MySQL:**
+```sql
+SELECT 
+    Name,
+    DateOfBirth,
+    TIMESTAMPDIFF(YEAR, DateOfBirth, CURDATE()) AS Age
+FROM Employees;
+```
+
+**SQL Server:**
+```sql
+SELECT 
+    Name,
+    DateOfBirth,
+    DATEDIFF(YEAR, DateOfBirth, GETDATE()) AS Age
+FROM Employees;
+```
+
+**PostgreSQL:**
+```sql
+SELECT 
+    Name,
+    DateOfBirth,
+    EXTRACT(YEAR FROM AGE(CURRENT_DATE, DateOfBirth)) AS Age
+FROM Employees;
+```
+
+### Query c) Calculate Experience
+**Corrected SQL (Standard approach):**
+```sql
+SELECT 
+    Name, 
+    JoinDate,
+    FLOOR(DATEDIFF(CURRENT_DATE, JoinDate) / 365.25) AS YearsExperience
+FROM Employees;
+```
+
+**MySQL:**
+```sql
+SELECT 
+    Name,
+    JoinDate,
+    TIMESTAMPDIFF(YEAR, JoinDate, CURDATE()) AS YearsExperience
+FROM Employees;
+```
+
+### Query d) Extract DOB Components
+**Corrected SQL:**
+```sql
+SELECT 
+    Name, 
+    YEAR(DateOfBirth) AS BirthYear, 
+    MONTH(DateOfBirth) AS BirthMonth, 
+    DAY(DateOfBirth) AS BirthDay 
+FROM Employees;
+```
+
+**Expected Result:**
+| Name          | BirthYear | BirthMonth | BirthDay |
+|---------------|-----------|------------|----------|
+| Alice Johnson | 1985      | 5          | 20       |
+| Bob Smith     | 1990      | 8          | 10       |
+| Charlie Brown | 1986      | 3          | 25       |
+| Diana Prince  | 1992      | 1          | 30       |
+| Eve Adams     | 1987      | 12         | 5        |
+
+### Query e) Born in August
+**Corrected SQL:**
+```sql
+SELECT Name, DateOfBirth
+FROM Employees 
+WHERE MONTH(DateOfBirth) = 8;
+```
+
+**Expected Result:**
+| Name      | DateOfBirth |
+|-----------|-------------|
+| Bob Smith | 1990-08-10  |
+
+### Query f) Upcoming Birthdays (Next 30 Days)
+**Corrected SQL (MySQL):**
+```sql
+SELECT Name, DateOfBirth
+FROM Employees
+WHERE 
+    DATE_ADD(DateOfBirth, INTERVAL YEAR(CURRENT_DATE) - YEAR(DateOfBirth) YEAR)
+    BETWEEN CURRENT_DATE AND DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY)
+    OR
+    DATE_ADD(DateOfBirth, INTERVAL YEAR(CURRENT_DATE) - YEAR(DateOfBirth) + 1 YEAR)
+    BETWEEN CURRENT_DATE AND DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY);
+```
+
+**More readable MySQL version:**
+```sql
+SELECT Name, DateOfBirth
+FROM Employees
+WHERE 
+    DATE_FORMAT(DateOfBirth, '%m-%d') BETWEEN 
+        DATE_FORMAT(CURRENT_DATE, '%m-%d') AND 
+        DATE_FORMAT(DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY), '%m-%d')
+    OR
+    DATE_FORMAT(DateOfBirth, '%m-%d') BETWEEN 
+        '01-01' AND 
+        DATE_FORMAT(DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY), '%m-%d')
+    AND MONTH(DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY)) < MONTH(CURRENT_DATE);
+```
+
+**SQL Server version:**
+```sql
+SELECT Name, DateOfBirth
+FROM Employees
+WHERE 
+    DATEADD(YEAR, YEAR(GETDATE()) - YEAR(DateOfBirth), DateOfBirth)
+    BETWEEN GETDATE() AND DATEADD(DAY, 30, GETDATE())
+    OR
+    DATEADD(YEAR, YEAR(GETDATE()) - YEAR(DateOfBirth) + 1, DateOfBirth)
+    BETWEEN GETDATE() AND DATEADD(DAY, 30, GETDATE());
+```
+
+## Complete SQL Script for Submission (MySQL):
+
+```sql
+-- Create Employees Table
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    DateOfBirth DATE,
+    JoinDate DATE
+);
+
+-- Insert Sample Data
+INSERT INTO Employees (EmpID, Name, DateOfBirth, JoinDate) VALUES
+(1, 'Alice Johnson', '1985-05-20', '2010-06-15'),
+(2, 'Bob Smith', '1990-08-10', '2015-09-01'),
+(3, 'Charlie Brown', '1986-03-25', '2012-11-12'),
+(4, 'Diana Prince', '1992-01-30', '2017-07-06'),
+(5, 'Eve Adams', '1987-12-05', '2013-03-20');
+
+-- Query a: Current Date & Time
+SELECT CURRENT_TIMESTAMP AS CurrentDateTime;
+
+-- Query b: Calculate Age (MySQL)
+SELECT 
+    Name, 
+    DateOfBirth,
+    TIMESTAMPDIFF(YEAR, DateOfBirth, CURDATE()) AS Age
+FROM Employees;
+
+-- Query c: Calculate Experience (MySQL)
+SELECT 
+    Name,
+    JoinDate,
+    TIMESTAMPDIFF(YEAR, JoinDate, CURDATE()) AS YearsExperience
+FROM Employees;
+
+-- Query d: Extract DOB Components
+SELECT 
+    Name, 
+    YEAR(DateOfBirth) AS BirthYear, 
+    MONTH(DateOfBirth) AS BirthMonth, 
+    DAY(DateOfBirth) AS BirthDay 
+FROM Employees;
+
+-- Query e: Born in August
+SELECT Name, DateOfBirth
+FROM Employees 
+WHERE MONTH(DateOfBirth) = 8;
+
+-- Query f: Upcoming Birthdays (Next 30 Days - MySQL)
+SELECT Name, DateOfBirth
+FROM Employees
+WHERE 
+    DATE_ADD(DateOfBirth, INTERVAL YEAR(CURDATE()) - YEAR(DateOfBirth) YEAR)
+    BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+    OR
+    DATE_ADD(DateOfBirth, INTERVAL YEAR(CURDATE()) - YEAR(DateOfBirth) + 1 YEAR)
+    BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY);
+
+
+## Database Compatibility Guide:
+
+| Function | MySQL | SQL Server | PostgreSQL | Oracle |
+|----------|-------|------------|------------|--------|
+| Current Date | `CURDATE()` | `GETDATE()` | `CURRENT_DATE` | `SYSDATE` |
+| Date Difference | `DATEDIFF()` | `DATEDIFF()` | `AGE()` | `MONTHS_BETWEEN` |
+| Extract Year | `YEAR()` | `YEAR()` | `EXTRACT(YEAR)` | `EXTRACT(YEAR)` |
+| Add Interval | `DATE_ADD()` | `DATEADD()` | `+ INTERVAL` | `+ INTERVAL` |
+
