@@ -1,0 +1,232 @@
+# Assignment 7: SQL Joins & Set Operations
+
+## Step 1: Create and Populate Tables
+
+-- Employees table
+CREATE TABLE Employees (
+    EmplD INT PRIMARY KEY,
+    EmpName VARCHAR(50),
+    DepartmentID INT
+);
+
+INSERT INTO Employees (EmplD, EmpName, DepartmentID) VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', 103),
+(4, 'Diana', NULL),
+(5, 'Eve', 101);
+
+-- Departments table
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DeptName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+INSERT INTO Departments (DepartmentID, DeptName, Location) VALUES
+(101, 'HR', 'New York'),
+(102, 'IT', 'San Francisco'),
+(103, 'Finance', 'Chicago'),
+(104, 'Sales', 'Boston');
+```
+
+## Step 2: SQL Query Tasks
+
+### Query a) Inner Join
+**Corrected SQL:**
+```sql
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+**Expected Result:**
+| EmplD | EmpName | DeptName |
+|-------|---------|----------|
+| 1     | Alice   | HR       |
+| 2     | Bob     | IT       |
+| 3     | Charlie | Finance  |
+| 5     | Eve     | HR       |
+
+### Query b) Left Join
+**Corrected SQL:**
+```sql
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+LEFT JOIN Departments D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+**Expected Result:**
+| EmplD | EmpName | DeptName |
+|-------|---------|----------|
+| 1     | Alice   | HR       |
+| 2     | Bob     | IT       |
+| 3     | Charlie | Finance  |
+| 4     | Diana   | NULL     |
+| 5     | Eve     | HR       |
+
+### Query c) Right Join
+**Corrected SQL:**
+```sql
+SELECT D.DepartmentID, D.DeptName, E.EmpName
+FROM Employees E
+RIGHT JOIN Departments D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+**Expected Result:**
+| DepartmentID | DeptName | EmpName |
+|-------------|----------|---------|
+| 101         | HR       | Alice   |
+| 101         | HR       | Eve     |
+| 102         | IT       | Bob     |
+| 103         | Finance  | Charlie |
+| 104         | Sales    | NULL    |
+
+### Query d) Full Outer Join
+**Corrected SQL:**
+```sql
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+FULL OUTER JOIN Departments D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+**Expected Result:**
+| EmplD | EmpName | DeptName |
+|-------|---------|----------|
+| 1     | Alice   | HR       |
+| 2     | Bob     | IT       |
+| 3     | Charlie | Finance  |
+| 4     | Diana   | NULL     |
+| 5     | Eve     | HR       |
+| NULL  | NULL    | Sales    |
+
+
+### Query e) Cross Join
+**Corrected SQL:**
+```sql
+SELECT E.EmpName, D.DeptName
+FROM Employees E
+CROSS JOIN Departments D;
+```
+
+**Expected Result:** (5 employees × 4 departments = 20 rows)
+| EmpName | DeptName |
+|---------|----------|
+| Alice   | HR       |
+| Alice   | IT       |
+| Alice   | Finance  |
+| Alice   | Sales    |
+| Bob     | HR       |
+| Bob     | IT       |
+| ... and 15 more rows ... |
+
+### Query f) Union All
+**Corrected SQL:**
+```sql
+SELECT EmpName AS Name FROM Employees
+UNION ALL
+SELECT DeptName FROM Departments;
+```
+
+**Expected Result:**
+| Name     |
+|----------|
+| Alice    |
+| Bob      |
+| Charlie  |
+| Diana    |
+| Eve      |
+| HR       |
+| IT       |
+| Finance  |
+| Sales    |
+
+### Query g) Intersect (Department IDs present in both tables)
+**Corrected SQL:**
+```sql
+SELECT DepartmentID FROM Employees
+INTERSECT
+SELECT DepartmentID FROM Departments;
+```
+
+**Expected Result:**
+| DepartmentID |
+|-------------|
+| 101         |
+| 102         |
+| 103         |
+
+
+
+## Complete SQL Script for Submission:
+
+```sql
+-- Create Employees Table
+CREATE TABLE Employees (
+    EmplD INT PRIMARY KEY,
+    EmpName VARCHAR(50),
+    DepartmentID INT
+);
+
+-- Create Departments Table
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DeptName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+-- Insert Employee Data
+INSERT INTO Employees (EmplD, EmpName, DepartmentID) VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', 103),
+(4, 'Diana', NULL),
+(5, 'Eve', 101);
+
+-- Insert Department Data
+INSERT INTO Departments (DepartmentID, DeptName, Location) VALUES
+(101, 'HR', 'New York'),
+(102, 'IT', 'San Francisco'),
+(103, 'Finance', 'Chicago'),
+(104, 'Sales', 'Boston');
+
+-- Query a: Inner Join
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+INNER JOIN Departments D ON E.DepartmentID = D.DepartmentID;
+
+-- Query b: Left Join
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+LEFT JOIN Departments D ON E.DepartmentID = D.DepartmentID;
+
+-- Query c: Right Join
+SELECT D.DepartmentID, D.DeptName, E.EmpName
+FROM Employees E
+RIGHT JOIN Departments D ON E.DepartmentID = D.DepartmentID;
+
+-- Query d: Full Outer Join
+SELECT E.EmplD, E.EmpName, D.DeptName
+FROM Employees E
+FULL OUTER JOIN Departments D ON E.DepartmentID = D.DepartmentID;
+
+-- Query e: Cross Join
+SELECT E.EmpName, D.DeptName
+FROM Employees E
+CROSS JOIN Departments D;
+
+-- Query f: Union All
+SELECT EmpName AS Name FROM Employees
+UNION ALL
+SELECT DeptName FROM Departments;
+
+-- Query g: Intersect
+SELECT DepartmentID FROM Employees
+INTERSECT
+SELECT DepartmentID FROM Departments;
+```
+
